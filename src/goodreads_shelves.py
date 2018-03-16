@@ -7,12 +7,6 @@ from tqdm import tqdm
 BASE_URL = 'https://www.goodreads.com/book/title.xml?';
 GOODREADS_KEY = 'CQquiYWQqp8iiw10w38tYA'
 
-# # Filepath for a list of book titles separated by a newline
-# BOOK_TITLES = 'books.txt';
-# 
-# # Filepath to save book titles and their corresponding shelves in JSON format
-# OUTPUT_PATH = 'book_genres.json';
-
 
 def get_titles(path):
     """ Retrieves titles from list of titles at the path
@@ -47,6 +41,10 @@ def get_shelves_given_title(base, title, key):
     return shelves
 
 def get_shelves_given_titles(input_path, output_path):
+    """ Takes in a path for a file with a list of titles and the output path and
+        writes the titles and their corresponding shelves to the specified output
+        path
+    """
 
     titles = get_titles(input_path)
     book_genres = {}
