@@ -29,7 +29,7 @@ class PreProcessing:
                              if token_counts[token] > MIN_COUNT]
         return normalized_tokens
 
-    # Returns total corpus in vector format
+    # Returns total corpus and dictionary in vector format
     def process_books(self):
         book_tokens = []
         for book in os.listdir(self.book_directory):
@@ -43,4 +43,4 @@ class PreProcessing:
         corpus = [dictionary.doc2bow(token) for token in book_tokens]
         corpora.MmCorpus.serialize(CORPUS_PATH, corpus)
         
-        return corpus
+        return dictionary, corpus
