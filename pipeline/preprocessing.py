@@ -6,16 +6,18 @@ from nltk.tokenize.treebank import TreebankWordTokenizer
 from nltk.stem.wordnet import WordNetLemmatizer
 from gensim import corpora
 
+CORPUS_PATH = '../data/dumps/book_corpus.dict'
+BOOK_DIRECTORY = '../data/raw'
+MIN_COUNT = 10
 
 class PreProcessing:
     #Generates gensim corpus from raw book text
 
-    def __init__(self,tokenizer, lemmatizer, stop_words, book_directory, min_count):
+    def __init__(self,tokenizer, lemmatizer, stop_words, book_directory):
         self.lemmatizer = lemmatizer
         self.tokenizer = tokenizer
         self.stop_words = stop_words
         self.book_directory = book_directory
-        self.min_count = min_count
 
     # Raw text to list of tokens
     def tokenize(self, raw_text):
@@ -51,4 +53,4 @@ class PreProcessing:
         corpus = [dictionary.doc2bow(token) for token in book_tokens]
         corpora.MmCorpus.serialize(CORPUS_PATH, corpus)
         
-        return dictionary, corpus
+        return corpus, dictionary
