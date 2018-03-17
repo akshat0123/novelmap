@@ -1,3 +1,11 @@
+import os
+import string
+import tqdm
+from nltk.corpus import stopwords
+from nltk.tokenize.treebank import TreebankWordTokenizer
+from nltk.stem.wordnet import WordNetLemmatizer
+from gensim import corpora
+
 
 class PreProcessing:
     #Generates gensim corpus from raw book text
@@ -32,7 +40,7 @@ class PreProcessing:
     # Returns total corpus and dictionary in vector format
     def process_books(self):
         book_tokens = []
-        for book in os.listdir(self.book_directory):
+        for book in tqdm(os.listdir(self.book_directory)):
             with open(os.path.join(self.book_directory,book), 'r') as handle:
                 book_content = handle.read()
                 book_tokens.append(self.normalize_text(book_content))

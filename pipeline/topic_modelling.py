@@ -1,3 +1,7 @@
+from gensim.models import LdaModel
+from gensim.models import TfidfModel
+from gensim.models import LsiModel
+
 class TopicModelling:
 
     def __init__(self, dictionary, corpus, tf_idf_model, lsi_model, lda_model, num_topics, num_passes):
