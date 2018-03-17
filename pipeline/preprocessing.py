@@ -1,19 +1,22 @@
 import os
 import string
-import tqdm
+from tqdm import tqdm
 from nltk.corpus import stopwords
 from nltk.tokenize.treebank import TreebankWordTokenizer
 from nltk.stem.wordnet import WordNetLemmatizer
 from gensim import corpora
+from collections import Counter
 
+DICTIONARY_PATH = '../data/dumps/book_dictionary.dict'
 CORPUS_PATH = '../data/dumps/book_corpus.dict'
 BOOK_DIRECTORY = '../data/raw'
 MIN_COUNT = 10
 
-class PreProcessing:
-    #Generates gensim corpus from raw book text
 
-    def __init__(self,tokenizer, lemmatizer, stop_words, book_directory):
+class PreProcessing:
+    # Generates gensim corpus from raw book text
+
+    def __init__(self, tokenizer, lemmatizer, stop_words, book_directory):
         self.lemmatizer = lemmatizer
         self.tokenizer = tokenizer
         self.stop_words = stop_words
@@ -28,6 +31,7 @@ class PreProcessing:
         return [self.lemmatizer.lemmatize(token)
                 for token in tokens if token not in self.stop_words]
 
+    # Tokenize, lemmatize, remove punctuation
     def normalize_text(self, raw_text):
         translator = str.maketrans('', '', string.punctuation)
         raw_text = raw_text.translate(translator).lower()
@@ -35,22 +39,28 @@ class PreProcessing:
         lemmatized_tokens = self.lemmatize(tokens)
 
         token_counts = Counter(lemmatized_tokens)
+
         normalized_tokens = [token for token in lemmatized_tokens
                              if token_counts[token] > MIN_COUNT]
         return normalized_tokens
 
     # Returns total corpus and dictionary in vector format
     def process_books(self):
-        book_tokens = []
-        for book in tqdm(os.listdir(self.book_directory)):
-            with open(os.path.join(self.book_directory,book), 'r') as handle:
-                book_content = handle.read()
-                book_tokens.append(self.normalize_text(book_content))
+        if (os.path.isfile(DICTIONARY_PATH) and os.path.isfile(CORPUS_PATH)):
+            dictionary = corpora.Dictionary.load(DICTIONARY_PATH)
+            corpus = corpora.MmCorpus(CORPUS_PATH)
 
-        dictionary = corpora.Dictionary(book_tokens)
-        dictionary.save(os.path.join(DICTIONARY_PATH)
-        
-        corpus = [dictionary.doc2bow(token) for token in book_tokens]
-        corpora.MmCorpus.serialize(CORPUS_PATH, corpus)
-        
+        else:
+            book_tokens = []
+            for book in tqdm(os.listdir(self.book_directory)):
+                with open(os.path.join(self.book_directory, book), 'r') as f:
+                    book_content = f.read()
+                    book_tokens.append(self.normalize_text(book_content))
+
+            dictionary = corpora.Dictionary(book_tokens)
+            dictionary.save(DICTIONARY_PATH)
+
+            corpus = [dictionary.doc2bow(token) for token in book_tokens]
+            corpora.MmCorpus.serialize(CORPUS_PATH, corpus)
+
         return corpus, dictionary
