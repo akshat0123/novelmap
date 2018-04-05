@@ -5,19 +5,21 @@ from preprocessor import Preprocessor
 BOOK_TITLES_PATH = '../data/base/books.txt'
 BOOK_SHELVES_PATH = '../data/base/book_shelves.json'
 
-DELIMITER_PATH = '../data/base/books_delimiter_data.txt'
-RAW_PATH = '../data/raw'
+DELIM = '../data/base/books_delimiter_data.txt'
+RAW = '../data/raw'
 
-DICT_PATH = '../data/dumps/book_dictionary.dict'
-CORP_PATH = '../data/dumps/book_corpus.dict'
+DICT = '../data/dumps/book_dictionary.dict'
+CORP = '../data/dumps/book_corpus.dict'
+TOKEN = '../data/dumps/token_dump.p'
+
 
 def main():
 
     # Get Goodreads shelves for books for evaluation
-    get_shelves_given_titles(BOOK_TITLES_PATH, BOOK_SHELVES_PATH)
+    # get_shelves_given_titles(BOOK_TITLES_PATH, BOOK_SHELVES_PATH)
 
     # Get book texts split into chapters
-    preprocessor = Preprocessor(DICT_PATH, CORP_PATH, DELIMITER_PATH, RAW_PATH, 0)
+    preprocessor = Preprocessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
     dictionary, corpus, books = preprocessor.get_library_info()
 
 

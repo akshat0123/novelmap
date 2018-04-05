@@ -3,15 +3,15 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords
 from collections import Counter
 from gensim import corpora
-from tqdm import tqdm
-import string, os, re
+from os.path import isfile
+import string, pickle, re
 
 
 class Preprocessor:
     # Generates gensim corpus from raw book text
 
 
-    def __init__(self, dictionary_path, corpus_path, book_delimiter_path, book_raw_path, min_count):
+    def __init__(self, dict_path, corp_path, delim_path, raw_path, token_path, min_count):
         """ Takes in path to store/load dictionary and corpus, and the path for
             a file containing book titles and their corresponding chapter and
             ending delimiters, the file path containing all the raw book texts,
@@ -20,10 +20,11 @@ class Preprocessor:
         self.lemmatizer = WordNetLemmatizer() 
         self.tokenizer = TreebankWordTokenizer()
         self.stop_words = set(stopwords.words('english'))
-        self.dictionary_path = dictionary_path
-        self.corpus_path = corpus_path
-        self.book_delimiter_path = book_delimiter_path
-        self.book_raw_path = book_raw_path
+        self.dictionary_path = dict_path
+        self.corpus_path = corp_path
+        self.book_delimiter_path = delim_path
+        self.book_raw_path = raw_path
+        self.token_path = token_path
         self.min_count = min_count
 
 
@@ -138,6 +139,8 @@ class Preprocessor:
         corpus = [dictionary.doc2bow(tokens) for tokens in all_tokens]
         corpora.MmCorpus.serialize(self.corpus_path, corpus)
 
+        pickle.dump(books, open(self.token_path, 'wb'))
+
         return dictionary, corpus, books
 
 
@@ -149,14 +152,14 @@ class Preprocessor:
             as well as each chapter in the book
         """
 
-        if (os.path.isfile(self.dictionary_path) and os.path.isfile(self.corpus_path)):
+        if isfile(self.dictionary_path) and isfile(self.corpus_path) and isfile(self.token_path):
 
             dictionary = corpora.Dictionary.load(self.dictionary_path)
             corpus = corpora.MmCorpus(self.corpus_path)
-            all_tokens, books = self.get_all_tokens()
+            books = pickle.load(open(self.token_path, 'rb'))
 
         else:
 
-            dictionary, corpus, books = process_books()
+            dictionary, corpus, books = self.process_books()
 
         return dictionary, corpus, books
