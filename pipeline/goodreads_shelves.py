@@ -40,6 +40,7 @@ def get_shelves_given_title(base, title, key):
 
     return shelves
 
+
 def get_shelves_given_titles(input_path, output_path):
     """ Takes in a path for a file with a list of titles and the output path and
         writes the titles and their corresponding shelves to the specified output
