@@ -1,3 +1,7 @@
+data/dumps/*
+!/data/dumps/.gitkeep
+
+*.p
 .vscode/
 .gitignore
 __pycache__
