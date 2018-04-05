@@ -1,0 +1,40 @@
+Adventures of Huckleberry Finn,\s\sCHAPTER [IVXL][IVXL]*[IVXL]*[IVXL]*[IVXL]*[IVXL]*\.\s\s,End of the Project Gutenberg
+Alices Adventures in Wonderland,\s\sCHAPTER [IVX][IVX]*[IVX]*[IVX]*[IVX]*\.\s,End of Project Gutenberg
+Anna Karenina,\s\sChapter\s\d\d*\s\s,\*\*\* END OF THIS PROJECT GUTENBERG
+Anthem,\s\sPART\s\w,End of the Project Gutenberg
+A Tale of Two Cities,\s\s[IVX][IVX]*[IVX]*[IVX]*[IVX]*\.,End of the Project Gutenberg
+Captains Courageous,\s\sCHAPTER\s[IVX][IVX]*\s\s,End of Project Gutenberg
+Crime and Punishment,\s\sCHAPTER\s[IVX][IVX]*\s\s,End of Project Gutenberg
+Dracula,\s\s\s\sCHAPTER\s[IVX][IVX]*\s\s,THE END
+Dr Jekyll and Mr Hyde,,
+Ethan Frome,\n[IVX][IVX]*\n,End of the Project Gutenberg
+Frankenstein,\s\s\sChapter\s[1-9][0-9]*\s\s,End of the Project Gutenberg
+Great Expectations,\s\sChapter\s[IVXL][IVXL]*\s,End of the Project Gutenberg
+Gullivers Travels,\s\sCHAPTER\s[IVXL][IVXL]*\.\s,\*\*\*END OF THE PROJECT GUTENBERG
+Heart of Darkness,\s\s[I][I]*\s\s,End of the Project Gutenberg
+Kidnapped,\s\sCHAPTER\s[IVXL][IVXL]*\s\s,End of the Project Gutenberg
+Les Miserables,\n\nCHAPTER\s[IVXL][IVXL]*,End of the Project Gutenberg
+Moby Dick,,
+Oliver Twist,\n\nCHAPTER\s[IVXL][IVXL]*\n,End of the Project Gutenberg
+Phantom of the Opera,\n\nChapter\s[IVXL][IVXL]*\s,End of Project Gutenberg
+Pride and Prejudice,\n\nChapter\s\d\d*\s,End of the Project Gutenberg
+Sense and Sensibility,\n\nCHAPTER\s\d\d*\s,End of the Project Gutenberg
+Tarzan of the Apes,\n\nChapter\s[IVXL][IVXL]*\s,End of Project Gutenberg
+The Adventures of Sherlock Holmes,\sADVENTURE\s[IVX][IVX]*\.|\s[IVX][IVX]*\..*ADVENTURE,End of the Project Gutenberg
+The Adventures of Tom Sawyer,\n\nCHAPTER\s[IVXL][IVXL]*\n,End of the Project Gutenberg
+The Brothers Karamazov,\n\nChapter\s[IVXL][IVXL]*\.\s,THE END
+The Call of the Wild,\n\nChapter\s[IVXL][IVXL]*\.\s,End of the Project Gutenberg
+The Count of Monte Cristo,\n\n\nChapter\s\d\d*\.\s,End of Project Gutenberg
+The Jungle,\n\n\nChapter\s\d\d*\s,End of the Project Gutenberg
+The Life and Adventures of Robinson Crusoe,\n\n\nCHAPTER\s[IVX][IVX]*,\*\*\*END OF THE PROJECT GUTENBERG
+The Merry Adventures of Robin Hood,,
+The Picture of Dorian Gray,\n\n\nCHAPTER\s\d\d*\s,End of Project Gutenberg
+The Scarlett Letter,\n\n\n[IVX][IVX]*\.\s,End of Project Gutenberg
+The Three Musketeers,\n\n\n\d\d*\s,\*\*\* END OF THIS PROJECT GUTENBERG
+The Time Machine,\s\s\s[IVX][IVX]*\s\s,\*\*\* END OF THIS PROJECT GUTENBERG
+The War of the Worlds,\s\s\sCHAPTER\s,\*\*\* END OF THIS PROJECT GUTENBERG
+The Wonderful Wizard of Oz,\s\s\s\s\s\d\d*\.\s,\*\*\* END OF THIS PROJECT GUTENBERG
+Treasure Island,\n\n\n\n\d\d*\s\s,\*\*\* END OF THIS PROJECT GUTENBERG
+War and Peace,\n\nCHAPTER\s[IVX][IVX]*\n,\*\*\* END OF THIS PROJECT GUTENBERG
+White Fang,\n\nCHAPTER\s[IVX][IVX]*--,\*\*\*END OF THE PROJECT GUTENBERG
+Wuthering Heights,\n\nCHAPTER\s[IVX][IVX]*\s,\*\*\*END OF THE PROJECT GUTENBERG
