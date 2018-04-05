@@ -116,6 +116,7 @@ class Preprocessor:
                 book_tokens += chapter_tokens
             
             books[title] = {
+                'title': title,
                 'book_tokens': book_tokens,
                 'chapter_tokens': book_chapter_tokens
             }

@@ -1,5 +1,6 @@
 from goodreads_shelves import get_shelves_given_titles
 from preprocessor import Preprocessor
+from library import Library
 
 
 BOOK_TITLES_PATH = '../data/base/books.txt'
@@ -21,6 +22,10 @@ def main():
     # Get book texts split into chapters
     preprocessor = Preprocessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
     dictionary, corpus, books = preprocessor.get_library_info()
+
+    # Add all books into library 
+    library = Library(dictionary, corpus)
+    for title in books: library.add_book(books[title])
 
 
 if __name__ == '__main__':
