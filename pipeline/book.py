@@ -15,3 +15,4 @@ class Book:
                 book['chapter_tokens'][i]) for i in range(len(book['chapter_tokens'])
            )
         ]
+

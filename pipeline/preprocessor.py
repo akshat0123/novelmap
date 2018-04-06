@@ -55,6 +55,12 @@ class Preprocessor:
         return normalized_tokens
 
 
+    def remove_proper_nouns(self, text):
+        """
+        """
+        pass
+
+
     def get_chapter_tokens(self, book_path, section_splitter, end_splitter):
         """ Takes in book file path, chapter splitting regex, post-content removal
             regex, and returns a list normalized tokens for each chapter in the book
