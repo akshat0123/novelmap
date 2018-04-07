@@ -131,7 +131,7 @@ class PreProcessor:
 
             book_tokens = []
             for chapter_tokens in book_chapter_tokens:
-                book_tokens.append(chapter_tokens)
+                book_tokens += chapter_tokens
             
             books[title] = {
                 'title': title,
@@ -139,7 +139,7 @@ class PreProcessor:
                 'chapter_tokens': book_chapter_tokens
             }
 
-            all_tokens += book_tokens
+            all_tokens.append(book_tokens)
 
         return all_tokens, books
 

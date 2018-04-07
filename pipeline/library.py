@@ -46,8 +46,8 @@ class Library:
             list containing lists of tokens for each chapter in the book
         """
         book = Book(self.dictionary, book)
-        book_model = self.get_model_book(book.book_corpus)
-        book.add_model(book_model)
+        #book_model = self.get_model_book(book.book_corpus)
+        #book.add_model(book_model)
         self.books.append(book)
 
     def get_topics(self, book):

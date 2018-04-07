@@ -9,8 +9,7 @@ class Book:
             tokens for each chapter in the book
         """
         self.book_title = book['title']
-        self.book_corpus = [dictionary.doc2bow(chapter_tokens)
-                             for chapter_tokens in book['book_tokens']]
+        self.book_corpus = dictionary.doc2bow(book['book_tokens'])
         self.chapter_corpi = [
             dictionary.doc2bow(
                 book['chapter_tokens'][i]) for i in range(len(book['chapter_tokens'])
