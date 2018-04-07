@@ -15,10 +15,3 @@ class Book:
                 book['chapter_tokens'][i]) for i in range(len(book['chapter_tokens'])
            )
         ]
-        self.book_model = None
-
-    def add_model(self, model):
-        self.book_model = model
-
-    def get_topics(self):
-        return self.book_model.print_topics()

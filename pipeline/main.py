@@ -3,7 +3,6 @@ from preprocessor import PreProcessor
 from library import Library
 from tqdm import tqdm
 from os.path import isfile
-from gensim import similarities
 import pickle
 
 TITLES = '../data/base/books.txt'
@@ -17,6 +16,7 @@ CORP = '../data/dumps/book_corpus.dict'
 TOKEN = '../data/dumps/token_dump.p'
 
 LDA_MODEL = '../data/dumps/lda_model.p'
+LSI_MODEL = '../data/dumps/lsi_model.p'
 
 
 def main():
@@ -37,20 +37,15 @@ def main():
     else:
         lda = pickle.load(open(LDA_MODEL, 'rb'))
 
-    topics = lda.get_topics('text')
 
-    book_corpi = []
-    for book in lda.books:
-        corpus = book.book_corpus
-        name = book.book_title
-        book_corpi.append((name, corpus))
-    
-    lib_model = lda.model
-    index = similarities.MatrixSimilarity(lib_model[lda.corpus])
-    book_vec = lib_model[book_corpi[22][1]]
-    print(book_corpi[22][0])
-    print(book_corpi[34][0])
-    print(sorted(list(enumerate(index[book_vec])), key=lambda item: -item[1]))
+    if not isfile(LSI_MODEL):
+        lsi = Library(dictionary, corpus, num_topics = 50, chunksize=1000, model_type = 'LSI')
+        for title in tqdm(books):
+            lsi.add_book(books[title])
+        
+        pickle.dump(lsi, open(LSI_MODEL, 'wb'))
+    else:
+        lsi = pickle.load(open(LSI_MODEL, 'rb'))
 
 
 

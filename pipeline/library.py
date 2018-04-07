@@ -1,6 +1,7 @@
 from gensim.models import LdaModel
 from gensim.models import TfidfModel
 from gensim.models import LsiModel
+from gensim.similarities import MatrixSimilarity
 from book import Book
 
 
@@ -18,26 +19,34 @@ class Library:
         self.books = []
         self.model_type = model_type
         self.model = self.get_model_library()
+        self.index = MatrixSimilarity(self.model[self.corpus])
+
+
+    def get_lib_sim(self, book):
+        book_vec = self.get_book_vec(book)
+        sim_books = sorted(list(enumerate(self.index[book_vec])),
+                                 key=lambda item: -item[1])
+        return sim_books[1:]
+
+    def get_book_vec(self, book):
+        book_corpus = book.book_corpus
+        book_vec = self.model[book_corpus]
+        return book_vec
 
     def get_model_library(self):
         
         if self.model_type == 'LDA':
             model = LdaModel(self.corpus, num_topics=self.num_topics, id2word=self.dictionary,
                                          chunksize=self.chunksize, passes=self.passes)
-        return model
 
-    def get_model_book(self, book_corpus):
-        
-        if self.model_type == 'LDA':
-            model = LdaModel(self.corpus, num_topics=self.num_topics, id2word=self.dictionary,
-                                         chunksize=self.chunksize, passes=self.passes)
-        return model
-            
-        '''elif model == 'LSI':
+   
+        elif self.model_type == 'LSI':
             tfidf_model = TfidfModel(self.corpus, id2word=self.dictionary)
-            self.model = LsiModel(tfidf_model[self.corpus], num_topics=self.num_topics, id2word=self.dictionary, chunksize=2)
+            model = LsiModel(tfidf_model[self.corpus], num_topics=self.num_topics, id2word=self.dictionary, chunksize=2)
 
-        elif model == 'TFIDF':
+        return model
+
+        '''elif model == 'TFIDF':
             self.model = TfidfModel(self.corpus, id2word=self.dictionary)'''
 
 
@@ -46,8 +55,6 @@ class Library:
             list containing lists of tokens for each chapter in the book
         """
         book = Book(self.dictionary, book)
-        #book_model = self.get_model_book(book.book_corpus)
-        #book.add_model(book_model)
         self.books.append(book)
 
     def get_topics(self, book):
