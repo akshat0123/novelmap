@@ -24,23 +24,11 @@ def main():
     preprocessor = Preprocessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
     dictionary, corpus, books = preprocessor.get_library_info()
 
-    # Add all books into library 
-    tfidf = Library(dictionary, corpus, 50, 'TFIDF')
-    for title in tqdm(books): tfidf.add_book(books[title])
-
     lda = Library(dictionary, corpus, 50, 'LDA')
     for title in tqdm(books): lda.add_book(books[title])
 
-    lsi = Library(dictionary, corpus, 50, 'LSI')
-    for title in tqdm(books): lsi.add_book(books[title])
-
-    topics_tfidf = tfidf.get_topics('text')
-    topics_lda = lda.get_topics('text')
-    topics_lsi = lsi.get_topics('text')
-
-    print(topics_tfidf) 
-    print(topics_lda) 
-    print(topics_lsi) 
+    topics = lda.get_topics('text')
+    print(topics)
 
 if __name__ == '__main__':
     main()

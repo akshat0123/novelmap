@@ -30,11 +30,12 @@ class Library:
         """ Take dictionary containing title, list of tokens for the book, and a
             list containing lists of tokens for each chapter in the book
         """
+
         book = Book(self.dictionary, book)
         self.books.append(book)
 
     
-    def get_topics(self, text):
+    def get_topics(self, book):
         """ Takes in a text and returns the topics for that book
         """
         return self.model.print_topics()
@@ -50,7 +51,7 @@ class Library:
         """ Takes in a text and returns the topics for that book in vector
             format
         """
-        return self.model.print_topics()
+        pass
 
 
     def get_keyword_vectors(self, text):
