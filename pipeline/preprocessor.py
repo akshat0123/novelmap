@@ -8,7 +8,7 @@ from nltk import pos_tag
 import string, pickle, re
 
 
-class Preprocessor:
+class PreProcessor:
     # Generates gensim corpus from raw book text
 
 
@@ -47,8 +47,8 @@ class Preprocessor:
             included in the model
         """
 
-        if pos in ['JJ', 'JJR', 'JJS', 'NN', 'NNS', 'RB', 'RBR', \
-                   'RBS', 'VB', 'VBD', 'VBG', 'VBN', 'VBZ']:
+        if pos in {'JJ', 'JJR', 'JJS', 'NN', 'NNS', 'FW'
+                    'VB', 'VBD', 'VBG', 'VBN', 'VBZ'}:
             return True
 
         else: 
@@ -131,7 +131,7 @@ class Preprocessor:
 
             book_tokens = []
             for chapter_tokens in book_chapter_tokens:
-                book_tokens += chapter_tokens
+                book_tokens.append(chapter_tokens)
             
             books[title] = {
                 'title': title,
@@ -139,7 +139,7 @@ class Preprocessor:
                 'chapter_tokens': book_chapter_tokens
             }
 
-            all_tokens.append(book_tokens)
+            all_tokens += book_tokens
 
         return all_tokens, books
 
@@ -151,7 +151,6 @@ class Preprocessor:
         """
 
         all_tokens, books = self.get_all_tokens()
-
         dictionary = corpora.Dictionary(all_tokens)
         dictionary.save(self.dictionary_path)
 

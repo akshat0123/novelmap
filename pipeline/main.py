@@ -1,5 +1,5 @@
 from goodreads_shelves import get_shelves_given_titles
-from preprocessor import Preprocessor
+from preprocessor import PreProcessor
 from library import Library
 from tqdm import tqdm
 
@@ -21,14 +21,18 @@ def main():
     # get_shelves_given_titles(TITLES, SHELVES)
 
     # Get book texts split into chapters
-    preprocessor = Preprocessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
+    preprocessor = PreProcessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
     dictionary, corpus, books = preprocessor.get_library_info()
-
-    lda = Library(dictionary, corpus, 50, 'LDA')
-    for title in tqdm(books): lda.add_book(books[title])
+    lda = Library(dictionary, corpus, num_topics = 50, chunksize=1000, model_type = 'LDA')
+    for title in tqdm(books):
+         lda.add_book(books[title])
+         break
 
     topics = lda.get_topics('text')
-    print(topics)
+
+    for book in lda.books:
+        print(book.book_title)
+        print(book.get_topics())
 
 if __name__ == '__main__':
     main()
