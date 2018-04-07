@@ -4,6 +4,7 @@ from nltk.corpus import stopwords
 from collections import Counter
 from gensim import corpora
 from os.path import isfile
+from nltk import pos_tag
 import string, pickle, re
 
 
@@ -41,24 +42,35 @@ class Preprocessor:
                 for token in tokens if token not in self.stop_words]
 
 
+    def is_valuable_pos(self, pos):
+        """ Given part of speech, returns whether or not token should be
+            included in the model
+        """
+
+        if pos in ['JJ', 'JJR', 'JJS', 'NN', 'NNS', 'RB', 'RBR', \
+                   'RBS', 'VB', 'VBD', 'VBG', 'VBN', 'VBZ']:
+            return True
+
+        else: 
+            return False
+    
+
     def normalize_text(self, raw_text):
-        """ Tokenize, lemmatize, remove punctuation
+        """ Tokenize, lemmatize, remove punctuation and proper nouns
         """
         translator = str.maketrans('', '', string.punctuation)
-        raw_text = raw_text.translate(translator).lower()
+        raw_text = raw_text.translate(translator)
         tokens = self.tokenize(raw_text)
-        lemmatized_tokens = self.lemmatize(tokens)
 
+        pos_tagged_tokens = pos_tag(tokens)
+        tokens = [token[0] for token in pos_tagged_tokens if self.is_valuable_pos(token[1])]
+
+        lemmatized_tokens = self.lemmatize(tokens)
         token_counts = Counter(lemmatized_tokens)
 
-        normalized_tokens = [token for token in lemmatized_tokens if token_counts[token] > self.min_count]
-        return normalized_tokens
+        normalized_tokens = [token.lower() for token in lemmatized_tokens if token_counts[token] > self.min_count]
 
-
-    def remove_proper_nouns(self, text):
-        """
-        """
-        pass
+        return normalized_tokens 
 
 
     def get_chapter_tokens(self, book_path, section_splitter, end_splitter):

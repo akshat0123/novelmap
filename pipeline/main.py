@@ -34,11 +34,11 @@ def main():
     lsi = Library(dictionary, corpus, 50, 'LSI')
     for title in tqdm(books): lsi.add_book(books[title])
 
-    # topics_tfidf = tfidf.get_topics('text')
+    topics_tfidf = tfidf.get_topics('text')
     topics_lda = lda.get_topics('text')
     topics_lsi = lsi.get_topics('text')
 
-    # print(topics_tfidf) 
+    print(topics_tfidf) 
     print(topics_lda) 
     print(topics_lsi) 
 
