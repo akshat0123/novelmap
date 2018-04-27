@@ -28,10 +28,12 @@ class Library:
                                  key=lambda item: -item[1])
         return sim_books[1:]
 
+
     def get_book_vec(self, book):
         book_corpus = book.book_corpus
         book_vec = self.model[book_corpus]
         return book_vec
+
 
     def get_model_library(self):
         
@@ -39,15 +41,11 @@ class Library:
             model = LdaModel(self.corpus, num_topics=self.num_topics, id2word=self.dictionary,
                                          chunksize=self.chunksize, passes=self.passes)
 
-   
         elif self.model_type == 'LSI':
             tfidf_model = TfidfModel(self.corpus, id2word=self.dictionary)
             model = LsiModel(tfidf_model[self.corpus], num_topics=self.num_topics, id2word=self.dictionary, chunksize=2)
 
         return model
-
-        '''elif model == 'TFIDF':
-            self.model = TfidfModel(self.corpus, id2word=self.dictionary)'''
 
 
     def add_book(self, book):
@@ -57,39 +55,8 @@ class Library:
         book = Book(self.dictionary, book)
         self.books.append(book)
 
+
     def get_topics(self, book):
         """ Takes in a text and returns the topics for that book
         """
         return self.model.print_topics()
-
-
-    def get_keywords(self, text):
-        """ Takes in a text and returns the keywords for that book
-        """
-        pass
-
-
-    def get_topic_vectors(self, text):
-        """ Takes in a text and returns the topics for that book in vector
-            format
-        """
-        pass
-
-
-    def get_keyword_vectors(self, text):
-        """ Takes in a text and returns the keywords for that book in vector
-            format
-        """
-        pass
-
-
-    def get_similarity(booka, bookb):
-        """
-        """
-        pass
-    
-
-    def cluster(self, k):
-        """ Gets topic vectors for all books and clusters them
-        """
-        pass

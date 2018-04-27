@@ -48,6 +48,5 @@ def main():
         lsi = pickle.load(open(LSI_MODEL, 'rb'))
 
 
-
 if __name__ == '__main__':
     main()
