@@ -1,5 +1,6 @@
 from bigram_model import BigramModel
 from tqdm import trange
+from tqdm import tqdm
 import numpy as np
 
 
@@ -14,6 +15,13 @@ class TopicModel:
         """ Takes in a document as a list of tokens and updates the bigram model 
         """
         self.bigram_model.add_document(document)
+
+
+    def add_documents(self, documents):
+        """ Takes in a list of documents and updates the bigram model
+        """
+        for document in tqdm(documents, desc='Adding Documents to Model'):
+            self.add_document(document)
 
 
     def gen_y_axis(self, size):
@@ -83,18 +91,53 @@ class TopicModel:
         for i in range(len(y_axes)):
             y_axis = y_axes[i]
 
-            # Map document to y axis feature space for the current y axis
             reals = np.array([doc_mappings[i] for j in range(len(y_axis))])
 
-            # Generate fake documents for each unigram on the current y axis
-            fakes = np.array([[j for k in range(len(doc_mappings[i]))] for j in range(len(y_axis))]) 
+            # Map document to y axis feature space for the current y axis
+            if reals.shape[1] != 0:
 
-            # Calculate the distances between the real document and each
-            # fake book for the current y axis
-            dists = np.absolute(fakes - reals)
+                # Generate fake documents for each unigram on the current y axis
+                fakes = np.array([[j for k in range(len(doc_mappings[i]))] for j in range(len(y_axis))]) 
 
-            # Calculate the average distances between the book and each
-            # unigram for the current y axis
-            avg_dists.append(np.average(dists, axis=1))
+                # Calculate the distances between the real document and each
+                # fake book for the current y axis
+                dists = np.absolute(fakes - reals)
+
+                # Calculate the average distances between the book and each
+                # unigram for the current y axis
+                avg_dists.append(np.average(dists, axis=1))
+
+            else:
+                avg_dists.append([np.inf for i in range(len(y_axis))])
 
         return avg_dists
+
+
+    def calc_topics(self, documents, y_axes):
+        """ Takes in a list of documents and a set of y axes generated from the
+            'generate_y_axes' function and returns a list of average distances
+            from all books to each unigram on each y axis
+        """
+
+        # Calculate average distances for each book and each y axis
+        avg_dists = []
+        for document in tqdm(documents, desc='Calculating Average Distances'):
+            avg_dists.append(self.calc_real_fake_dists(document, y_axes))
+
+        # Extract topics from all documents
+        topic_freqs = {}
+        for y_axis_index in trange(len(y_axes), desc='Extracting Topics'):
+            y_axis = y_axes[y_axis_index]
+
+            for doc_index in range(len(documents)):
+                document = documents[doc_index]
+                y_index = np.argmin(avg_dists[doc_index][y_axis_index])
+                topic = y_axis[y_index]
+
+                if topic in topic_freqs: 
+                    topic_freqs[topic] += 1
+
+                else:
+                    topic_freqs[topic] = 1
+
+        return topic_freqs

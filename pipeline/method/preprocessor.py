@@ -1,6 +1,7 @@
 from nltk.tokenize.treebank import TreebankWordTokenizer
 from nltk.stem.wordnet import WordNetLemmatizer
-from nltk.corpus import stopwords
+# from nltk.corpus import stopwords
+from stop_words import stop_words
 from collections import Counter
 from gensim import corpora
 from os.path import isfile
@@ -20,7 +21,8 @@ class PreProcessor:
         """
         self.lemmatizer = WordNetLemmatizer() 
         self.tokenizer = TreebankWordTokenizer()
-        self.stop_words = set(stopwords.words('english'))
+        # self.stop_words = set(stopwords.words('english'))
+        self.stop_words = stop_words
         self.dictionary_path = dict_path
         self.corpus_path = corp_path
         self.book_delimiter_path = delim_path

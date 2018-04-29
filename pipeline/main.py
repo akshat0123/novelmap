@@ -21,31 +21,41 @@ LSI_MODEL = '../data/dumps/lsi_model.p'
 
 def main():
 
-    # Get Goodreads shelves for books for evaluation
+    # # Get Goodreads shelves for books for evaluation
     # get_shelves_given_titles(TITLES, SHELVES)
 
-    # Get book texts split into chapters
-    preprocessor = PreProcessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
-    dictionary, corpus, books = preprocessor.get_library_info()
-    
-    if not isfile(LDA_MODEL):
-        lda = Library(dictionary, corpus, num_topics = 50, chunksize=1000, model_type = 'LDA')
-        for title in tqdm(books):
-            lda.add_book(books[title])
-        
-        pickle.dump(lda, open(LDA_MODEL, 'wb'))
-    else:
-        lda = pickle.load(open(LDA_MODEL, 'rb'))
+    # with open(SHELVES, 'r') as f:
+    #     for line in f.readlines():
+    #         print(line)
 
+    # # Get book texts split into chapters
+    # preprocessor = PreProcessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
+    # dictionary, corpus, books = preprocessor.get_library_info()
+    # 
+    # if not isfile(LDA_MODEL):
+    #     lda = Library(dictionary, corpus, num_topics = 50, chunksize=1000, model_type = 'LDA')
+    #     for title in tqdm(books):
+    #         lda.add_book(books[title])
+    #     
+    #     pickle.dump(lda, open(LDA_MODEL, 'wb'))
+    # else:
+    #     lda = pickle.load(open(LDA_MODEL, 'rb'))
 
-    if not isfile(LSI_MODEL):
-        lsi = Library(dictionary, corpus, num_topics = 50, chunksize=1000, model_type = 'LSI')
-        for title in tqdm(books):
-            lsi.add_book(books[title])
-        
-        pickle.dump(lsi, open(LSI_MODEL, 'wb'))
-    else:
-        lsi = pickle.load(open(LSI_MODEL, 'rb'))
+    # titles = list(books.keys())
+    # for title in titles:
+    #     book = books[title]['book_tokens']
+    #     bow = dictionary.doc2bow(book)
+    #     book_topics = lda.model[bow]
+    #     print(title, book_topics)
+
+    # if not isfile(LSI_MODEL):
+    #     lsi = Library(dictionary, corpus, num_topics = 50, chunksize=1000, model_type = 'LSI')
+    #     for title in tqdm(books):
+    #         lsi.add_book(books[title])
+    #     
+    #     pickle.dump(lsi, open(LSI_MODEL, 'wb'))
+    # else:
+    #     lsi = pickle.load(open(LSI_MODEL, 'rb'))
 
 
 if __name__ == '__main__':
