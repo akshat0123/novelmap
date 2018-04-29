@@ -7,8 +7,8 @@ import numpy as np
 class TopicModel:
 
 
-    def __init__(self):
-        self.bigram_model = BigramModel()
+    def __init__(self, threshold):
+        self.bigram_model = BigramModel(threshold)
 
 
     def add_document(self, document):
@@ -23,6 +23,10 @@ class TopicModel:
         for document in tqdm(documents, desc='Adding Documents to Model'):
             self.add_document(document)
 
+    
+    def redistribute(self, threshold):
+        pass
+    
 
     def gen_y_axis(self, size):
         """ Uses bigram model to generate y axis of specified size
@@ -125,7 +129,7 @@ class TopicModel:
             avg_dists.append(self.calc_real_fake_dists(document, y_axes))
 
         # Extract topics from all documents
-        topic_freqs = {}
+        topic_freqs, doc_topics = {}, [{} for i in range(len(documents))] 
         for y_axis_index in trange(len(y_axes), desc='Extracting Topics'):
             y_axis = y_axes[y_axis_index]
 
@@ -137,7 +141,13 @@ class TopicModel:
                 if topic in topic_freqs: 
                     topic_freqs[topic] += 1
 
-                else:
+                else: 
                     topic_freqs[topic] = 1
 
-        return topic_freqs
+                if topic in doc_topics[doc_index]:
+                    doc_topics[doc_index][topic].append(avg_dists[doc_index][y_axis_index])
+
+                else:
+                    doc_topics[doc_index][topic] = [avg_dists[doc_index][y_axis_index]]
+
+        return topic_freqs, doc_topics

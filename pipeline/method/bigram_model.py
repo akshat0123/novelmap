@@ -5,13 +5,13 @@ import numpy as np
 class BigramModel:
 
 
-    def __init__(self):
+    def __init__(self, threshold):
 
         self.unigram_term_freqs = {}
         self.bigram_term_freqs = {}
         self.unigram_total_term_freqs = 0
         self.bigram_total_term_freqs = {}
-        self.counter = 0
+        self.threshold = threshold
 
 
     def add_unigram(self, unigram):
@@ -66,6 +66,16 @@ class BigramModel:
 
         for term in term_freqs:
             term_probs[term] = term_freqs[term] / total_term_count
+
+        probs = list(set([term_probs[term] for term in term_probs]))
+        probs = sorted(probs)
+
+        threshold_index = int((len(probs) - 1) * self.threshold)
+        threshold_value = probs[threshold_index]
+
+        for term in term_probs:
+            if term_probs[term] > threshold_value:
+                term_probs[term] *= threshold_value**2
 
         return term_probs
 
