@@ -13,7 +13,7 @@ class PreProcessor:
     # Generates gensim corpus from raw book text
 
 
-    def __init__(self, dict_path, corp_path, delim_path, raw_path, token_path, min_count):
+    def __init__(self, dict_path, corp_path, delim_path, raw_path, token_path):
         """ Takes in path to store/load dictionary and corpus, and the path for
             a file containing book titles and their corresponding chapter and
             ending delimiters, the file path containing all the raw book texts,
@@ -28,7 +28,6 @@ class PreProcessor:
         self.book_delimiter_path = delim_path
         self.book_raw_path = raw_path
         self.token_path = token_path
-        self.min_count = min_count
 
 
     def tokenize(self, raw_text):
@@ -70,7 +69,8 @@ class PreProcessor:
         lemmatized_tokens = self.lemmatize(tokens)
         token_counts = Counter(lemmatized_tokens)
 
-        normalized_tokens = [token.lower() for token in lemmatized_tokens if token_counts[token] > self.min_count]
+        normalized_tokens = [token.lower() for token in lemmatized_tokens if token_counts[token]]
+
 
         return normalized_tokens 
 
@@ -142,8 +142,17 @@ class PreProcessor:
             }
 
             all_tokens.append(book_tokens)
+            
+        all_tokens_together = [token for book in all_tokens for token in book]
+        all_tokens_count = Counter(all_tokens_together)
+        top_100_tokens = {tup[0] for tup in all_tokens_count.most_common(100)}
+        final_tokens = []
 
-        return all_tokens, books
+        for book_tokens in all_tokens:
+            tokens = [token for token in book_tokens if (all_tokens_count[token] >= 10 and token not in top_100_tokens)]
+            final_tokens.append(tokens)
+            
+        return final_tokens, books
 
 
     def process_books(self):

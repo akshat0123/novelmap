@@ -8,7 +8,7 @@ import pickle
 
 def main():
 
-    preprocessor = PreProcessor(DICT, CORP, DELIM, RAW, TOKEN, 0)
+    preprocessor = PreProcessor(DICT, CORP, DELIM, RAW, TOKEN)
     dictionary, corpus, books = preprocessor.get_library_info()
 
     books = [(book, books[book]['book_tokens']) for book in books]
