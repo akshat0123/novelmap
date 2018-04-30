@@ -13,7 +13,7 @@ class PreProcessor:
     # Generates gensim corpus from raw book text
 
 
-    def __init__(self, dict_path, corp_path, delim_path, raw_path, token_path):
+    def __init__(self, dict_path, corp_path, delim_path, raw_path, token_path, min_count, headword_removal_perc ):
         """ Takes in path to store/load dictionary and corpus, and the path for
             a file containing book titles and their corresponding chapter and
             ending delimiters, the file path containing all the raw book texts,
@@ -28,6 +28,8 @@ class PreProcessor:
         self.book_delimiter_path = delim_path
         self.book_raw_path = raw_path
         self.token_path = token_path
+        self.min_count = min_count
+        self.headword_removal_perc = headword_removal_perc
 
 
     def tokenize(self, raw_text):
@@ -145,13 +147,37 @@ class PreProcessor:
             
         all_tokens_together = [token for book in all_tokens for token in book]
         all_tokens_count = Counter(all_tokens_together)
-        top_100_tokens = {tup[0] for tup in all_tokens_count.most_common(100)}
+
+        headword_removal_num = int(self.headword_removal_perc * len(all_tokens_count))
+        top_tokens = {tup[0] for tup in all_tokens_count.most_common(headword_removal_num)}
         final_tokens = []
 
         for book_tokens in all_tokens:
-            tokens = [token for token in book_tokens if (all_tokens_count[token] >= 10 and token not in top_100_tokens)]
+            tokens = [token for token in book_tokens if (all_tokens_count[token] >= self.min_count and token not in top_tokens)]
             final_tokens.append(tokens)
-            
+
+        for title in book_delimiter_data:
+
+            path = book_delimiter_data[title]['path']
+            section = book_delimiter_data[title]['section_delimiter']
+            end = book_delimiter_data[title]['end_delimiter']
+
+            book_chapter_tokens = []
+            temp_book_chapter_tokens = self.get_chapter_tokens(path, section, end)
+            book_tokens = []
+            for chapter_tokens in temp_book_chapter_tokens:
+                chapter_tokens = [token for token in chapter_tokens
+                                     if (all_tokens_count[token] >= self.min_count and token not in top_tokens)]
+                book_chapter_tokens.append(chapter_tokens)
+                book_tokens += chapter_tokens
+
+            books[title] = {
+                'title': title,
+                'book_tokens': book_tokens,
+                'chapter_tokens': book_chapter_tokens
+            }
+                    
+
         return final_tokens, books
 
 
@@ -162,6 +188,7 @@ class PreProcessor:
         """
 
         all_tokens, books = self.get_all_tokens()
+        
         dictionary = corpora.Dictionary(all_tokens)
         dictionary.save(self.dictionary_path)
 
