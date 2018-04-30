@@ -7,8 +7,10 @@ import numpy as np
 class TopicModel:
 
 
-    def __init__(self, threshold):
+    def __init__(self, y_axis_count, y_axis_length, threshold):
         self.bigram_model = BigramModel(threshold)
+        self.y_axis_count = y_axis_count
+        self.y_axis_length = y_axis_length
 
 
     def add_document(self, document):
@@ -24,23 +26,19 @@ class TopicModel:
             self.add_document(document)
 
     
-    def redistribute(self, threshold):
-        pass
-    
-
-    def gen_y_axis(self, size):
+    def gen_y_axis(self):
         """ Uses bigram model to generate y axis of specified size
         """
-        return self.bigram_model.gen_document(size)
+        return self.bigram_model.gen_document(self.y_axis_length)
 
 
-    def gen_y_axes(self, count, size):
+    def gen_y_axes(self):
         """ Uses bigram model to generate specified number of y axes specified
             number of times
         """
         y_axes = []
-        for i in trange(count, desc='Generating Y Axes'):
-            y_axes.append(self.gen_y_axis(size))
+        for i in trange(self.y_axis_count, desc='Generating Y Axes'):
+            y_axes.append(self.gen_y_axis())
 
         return y_axes
 
@@ -112,7 +110,7 @@ class TopicModel:
                 avg_dists.append(np.average(dists, axis=1))
 
             else:
-                avg_dists.append([np.inf for i in range(len(y_axis))])
+                avg_dists.append([self.y_axis_length for i in range(len(y_axis))])
 
         return avg_dists
 

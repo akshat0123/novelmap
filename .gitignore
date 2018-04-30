@@ -6,3 +6,4 @@ data/dumps/*
 .vscode/
 *.gitignore
 __pycache__
+notebooks

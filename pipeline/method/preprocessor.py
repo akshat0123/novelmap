@@ -1,6 +1,6 @@
 from nltk.tokenize.treebank import TreebankWordTokenizer
 from nltk.stem.wordnet import WordNetLemmatizer
-# from nltk.corpus import stopwords
+from nltk.corpus import stopwords
 from stop_words import stop_words
 from collections import Counter
 from gensim import corpora
