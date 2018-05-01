@@ -7,6 +7,7 @@ from gensim import corpora
 from os.path import isfile
 from nltk import pos_tag
 import string, pickle, re
+from tqdm import tqdm
 
 
 class PreProcessor:
@@ -125,7 +126,7 @@ class PreProcessor:
         book_delimiter_data = self.get_book_delimiter_data()
         all_tokens, books = [], {}
 
-        for title in book_delimiter_data:
+        for title in tqdm(book_delimiter_data, desc='Splitting Books'):
 
             path = book_delimiter_data[title]['path']
             section = book_delimiter_data[title]['section_delimiter']
@@ -152,7 +153,7 @@ class PreProcessor:
         top_tokens = {tup[0] for tup in all_tokens_count.most_common(headword_removal_num)}
         final_tokens = []
 
-        for book_tokens in all_tokens:
+        for book_tokens in tqdm(all_tokens, desc='Removing Headwords & Tailwords'):
             tokens = [token for token in book_tokens if (all_tokens_count[token] >= self.min_count and token not in top_tokens)]
             final_tokens.append(tokens)
 

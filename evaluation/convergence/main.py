@@ -17,7 +17,10 @@ def main():
     titles, books = zip(*books)
 
 
-    for y_axis_count in tqdm([10000, 20000, 30000]):
+    for y_axis_count in tqdm(range(10000, 50000, 10000)):
+    # for y_axis_count in tqdm(range(50000, 80000, 10000)):
+    # for y_axis_count in tqdm(range(80000, 100000, 10000)):
+    # for y_axis_count in tqdm(range(100000, 110000, 10000)):
 
         for i in trange(10):
 
@@ -25,7 +28,7 @@ def main():
             tm.add_documents(books)
 
             y_axes = tm.gen_y_axes()
-            topic_freqs, book_topics = tm.calc_trigram_topics(books, y_axes)
+            topic_freqs, book_topics = tm.calc_unigram_topics(books, y_axes)
 
             sorted_topics = [(topic, topic_freqs[topic]) for topic in topic_freqs]
             sorted_topics = sorted(sorted_topics, key=lambda x: x[1], reverse=True)

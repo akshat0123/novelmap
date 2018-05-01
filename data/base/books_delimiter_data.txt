@@ -6,7 +6,6 @@ A Tale of Two Cities,\s\s[IVX][IVX]*[IVX]*[IVX]*[IVX]*\.,End of the Project Gute
 Captains Courageous,\s\sCHAPTER\s[IVX][IVX]*\s\s,End of Project Gutenberg
 Crime and Punishment,\s\sCHAPTER\s[IVX][IVX]*\s\s,End of Project Gutenberg
 Dracula,\s\s\s\sCHAPTER\s[IVX][IVX]*\s\s,THE END
-Dr Jekyll and Mr Hyde,,
 Ethan Frome,\n[IVX][IVX]*\n,End of the Project Gutenberg
 Frankenstein,\s\s\sChapter\s[1-9][0-9]*\s\s,End of the Project Gutenberg
 Great Expectations,\s\sChapter\s[IVXL][IVXL]*\s,End of the Project Gutenberg
@@ -14,7 +13,6 @@ Gullivers Travels,\s\sCHAPTER\s[IVXL][IVXL]*\.\s,\*\*\*END OF THE PROJECT GUTENB
 Heart of Darkness,\s\s[I][I]*\s\s,End of the Project Gutenberg
 Kidnapped,\s\sCHAPTER\s[IVXL][IVXL]*\s\s,End of the Project Gutenberg
 Les Miserables,\n\nCHAPTER\s[IVXL][IVXL]*,End of the Project Gutenberg
-Moby Dick,,
 Oliver Twist,\n\nCHAPTER\s[IVXL][IVXL]*\n,End of the Project Gutenberg
 Phantom of the Opera,\n\nChapter\s[IVXL][IVXL]*\s,End of Project Gutenberg
 Pride and Prejudice,\n\nChapter\s\d\d*\s,End of the Project Gutenberg
@@ -26,7 +24,7 @@ The Brothers Karamazov,\n\nChapter\s[IVXL][IVXL]*\.\s,THE END
 The Call of the Wild,\n\nChapter\s[IVXL][IVXL]*\.\s,End of the Project Gutenberg
 The Count of Monte Cristo,\n\n\nChapter\s\d\d*\.\s,End of Project Gutenberg
 The Jungle,\n\n\nChapter\s\d\d*\s,End of the Project Gutenberg
-The Life and Adventures of Robinson Crusoe,\n\n\nCHAPTER\s[IVX][IVX]*,\*\*\*END OF THE PROJECT GUTENBERG
+Robinson Crusoe,\n\n\nCHAPTER\s[IVX][IVX]*,\*\*\*END OF THE PROJECT GUTENBERG
 The Merry Adventures of Robin Hood,,
 The Picture of Dorian Gray,\n\n\nCHAPTER\s\d\d*\s,End of Project Gutenberg
 The Scarlett Letter,\n\n\n[IVX][IVX]*\.\s,End of Project Gutenberg
@@ -38,3 +36,13 @@ Treasure Island,\n\n\n\n\d\d*\s\s,\*\*\* END OF THIS PROJECT GUTENBERG
 War and Peace,\n\nCHAPTER\s[IVX][IVX]*\n,\*\*\* END OF THIS PROJECT GUTENBERG
 White Fang,\n\nCHAPTER\s[IVX][IVX]*--,\*\*\*END OF THE PROJECT GUTENBERG
 Wuthering Heights,\n\nCHAPTER\s[IVX][IVX]*\s,\*\*\*END OF THE PROJECT GUTENBERG
+A Study in Scarlet,\n\nCHAPTER [IVXL][IVXL]*.,ORIGINAL TRANSCRIBER’S NOTES
+The Valley of Fear,Chapter [IVXL][IVXL]*.,End of Project Gutenberg
+The Sign of the Four,Chapter [IVXL][IVXL]*.,End of Project Gutenberg
+Kai Lungs Golden Hours,CHAPTER\s[IVXL][IVXL]*.,End of Project Gutenberg
+Men of Iron,CHAPTER [0-9][0-9]*,End of the Project Gutenberg
+The Hound of the Baskervilles,\s\sChapter \d\d*\.,End of Project Gutenberg
+The Red Thumb Mark,\s\sCHAPTER [IVXL][IVXL]*[IVXL]*[IVXL]*[IVXL]*[IVXL]*\s\s,End of the Project Gutenberg
+The Damned,\s\sChapter [IVXL][IVXL]*[IVXL]*[IVXL]*[IVXL]*[IVXL]*\s\s,End of the Project Gutenberg
+The Jewel of Seven Stars,\s\sChapter [IVXL][IVXL]*[IVXL]*[IVXL]*[IVXL]*[IVXL]*\s\s,End of the Project Gutenberg
+The Idiot,\s\s[IVXL][IVXL]*[IVXL]*[IVXL]*[IVXL]*[IVXL]*\s\s,THE END

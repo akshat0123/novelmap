@@ -34,6 +34,7 @@ def get_shelves_given_title(base, title, key):
     """
 
     url = get_url(base, title, key)
+    print(url)
     html = urllib.request.urlopen(url)
     soup = BeautifulSoup(html.read(), 'lxml');
     shelves = [shelf['name'] for shelf in soup.findAll('shelf')]
@@ -54,8 +55,10 @@ def get_shelves_given_titles(input_path, output_path):
         shelves = get_shelves_given_title(BASE_URL, title, GOODREADS_KEY)
         book_genres[title] = shelves
 
+        print(title, len(book_genres[title]))
+
         # Time delay for API access limit
-        time.sleep(1)
+        time.sleep(2)
 
     with open(output_path, 'w+') as f:
         f.write(json.dumps(book_genres))

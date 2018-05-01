@@ -6,7 +6,6 @@ A Tale of Two Cities
 Captains Courageous
 Crime and Punishment
 Dracula
-Dr Jekyll and Mr Hyde
 Ethan Frome
 Frankenstein
 Great Expectations
@@ -14,7 +13,6 @@ Gullivers Travels
 Heart of Darkness
 Kidnapped
 Les Miserables
-Moby Dick
 Oliver Twist
 Phantom of the Opera
 Pride and Prejudice
@@ -26,7 +24,7 @@ The Brothers Karamazov
 The Call of the Wild
 The Count of Monte Cristo
 The Jungle
-The Life and Adventures of Robinson Crusoe
+Robinson Crusoe
 The Merry Adventures of Robin Hood
 The Picture of Dorian Gray
 The Scarlett Letter
@@ -38,3 +36,13 @@ Treasure Island
 War and Peace
 White Fang
 Wuthering Heights
+A Study in Scarlet
+The Valley of Fear
+The Sign of the Four
+Kai Lungs Golden Hours
+Men of Iron
+The Hound of the Baskervilles
+The Red Thumb Mark
+The Damned
+The Jewel of Seven Stars
+The Idiot
