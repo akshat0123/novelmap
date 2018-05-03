@@ -1,7 +1,8 @@
+from gensim.models.ldamulticore import LdaMulticore
+from gensim.similarities import MatrixSimilarity
 from gensim.models import LdaModel
 from gensim.models import TfidfModel
 from gensim.models import LsiModel
-from gensim.similarities import MatrixSimilarity
 from book import Book
 
 
@@ -38,8 +39,8 @@ class Library:
     def get_model_library(self):
         
         if self.model_type == 'LDA':
-            model = LdaModel(self.corpus, num_topics=self.num_topics, id2word=self.dictionary,
-                                         chunksize=self.chunksize, passes=self.passes)
+            model = LdaMulticore(self.corpus, num_topics=self.num_topics, id2word=self.dictionary,
+                                         chunksize=self.chunksize, passes=self.passes, workers=3)
 
         elif self.model_type == 'LSI':
             tfidf_model = TfidfModel(self.corpus, id2word=self.dictionary)

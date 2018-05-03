@@ -1,3 +1,6 @@
+report*
+!/report/.gitkeep
+
 data/dumps/*
 !/data/dumps/.gitkeep
 

@@ -1,11 +1,11 @@
 import re
 
-BOOK_PATH = '../data/raw/The Idiot.txt'
+BOOK_PATH = '../data/raw/Madame Bovary.txt'
 
 def main():
 
-    section_splitter = '\s\s[IVXL][IVXL]*[IVXL]*[IVXL]*[IVXL]*[IVXL]*\s\s'
-    end_splitter = 'THE END'
+    section_splitter = '\s\sChapter'
+    end_splitter = 'End of the Project Gutenberg'
 
     book_string = ''
     with open(BOOK_PATH, 'r') as f:

@@ -22,15 +22,15 @@ LSI_MODEL = '../data/dumps/lsi_model.p'
 def main():
 
     # Get Goodreads shelves for books for evaluation
-    get_shelves_given_titles(TITLES, SHELVES)
+    # get_shelves_given_titles(TITLES, SHELVES)
 
     # with open(SHELVES, 'r') as f:
     #     for line in f.readlines():
     #         print(line)
 
-    # # Get book texts split into chapters
-    # preprocessor = PreProcessor(DICT, CORP, DELIM, RAW, TOKEN, min_count = 10, headword_removal_perc = 0.05)
-    # dictionary, corpus, books = preprocessor.get_library_info()
+    # Get book texts split into chapters
+    preprocessor = PreProcessor(DICT, CORP, DELIM, RAW, TOKEN, min_count = 10, headword_removal_perc = 0.05)
+    dictionary, corpus, books = preprocessor.get_library_info()
     # 
     # if not isfile(LDA_MODEL):
     #     lda = Library(dictionary, corpus, num_topics = 50, chunksize=1000, model_type = 'LDA')
